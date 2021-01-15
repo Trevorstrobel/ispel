@@ -9,7 +9,7 @@ const sequelize = require('./util/database');
 
 const Topic = require('./models/topic');
 const Keyword = require('./models/topic');
-const TopicKeyword = require('./models/topicKeyword');
+const Relationships = require('./models/Relationships');
 
 const app = express();
 

@@ -28,15 +28,11 @@ const Topic = sequelize.define('topic', {
       allowNull: false
   },
   
-  aliases: {
-      type:DataTypes.STRING,
-      allowNull: false
-  },
   teaser: {
       type:DataTypes.TEXT,
       allowNull: false
   },
-  content: {
+  content: { 
     type: DataTypes.TEXT,
     allowNull: false
 }

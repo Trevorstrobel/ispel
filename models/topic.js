@@ -1,7 +1,8 @@
 const DataTypes = require('sequelize');
 
-
 const sequelize = require('../util/database');
+
+const Keyword = require('./keyword');
 
 const Topic = sequelize.define('topic', {
   id: {
@@ -26,10 +27,7 @@ const Topic = sequelize.define('topic', {
       type: DataTypes.STRING,
       allowNull: false
   },
-  keywords: {
-      type: DataTypes.STRING,
-      allowNull: false
-  },
+  
   aliases: {
       type:DataTypes.STRING,
       allowNull: false
@@ -44,5 +42,7 @@ const Topic = sequelize.define('topic', {
 }
 
 });
+
+
 
 module.exports = Topic;

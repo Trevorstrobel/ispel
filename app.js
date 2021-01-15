@@ -8,12 +8,14 @@ const authorRoutes = require('./routes/author');
 const sequelize = require('./util/database');
 
 const Topic = require('./models/topic');
+const Keyword = require('./models/topic');
+const TopicKeyword = require('./models/topicKeyword');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-
+ 
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public'))); //provide static access to the public folder

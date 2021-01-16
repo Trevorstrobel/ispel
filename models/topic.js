@@ -15,6 +15,10 @@ const Topic = sequelize.define('topic', {
       type: DataTypes.STRING,
       allowNull: false
   },
+  area: {
+      type: DataTypes.STRING,
+      allowNull: false
+  },
   difficulty: {
       type: DataTypes.INTEGER,
       allowNull: false

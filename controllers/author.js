@@ -13,6 +13,7 @@ exports.getAddTopic = (req, res, next) => {
 };
 
 exports.postAddTopic = (req, res, next) => {
+  const domain = req.body.domain;
   const area = req.body.area;
   const topicId = req.body.topicId;
   const name = req.body.name;
@@ -23,6 +24,7 @@ exports.postAddTopic = (req, res, next) => {
   const content = req.body.content;
 
   Topic.create({
+    domain: domain,
     area: area,
     difficulty: difficulty,
     topicId: topicId,

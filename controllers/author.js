@@ -3,14 +3,22 @@ const Topic = require('../models/topic');
 const Alias = require('../models/alias');
 
 exports.getAddTopic = (req, res, next) => {
-  res.render('add-topic', {
-    pageTitle: 'Add Topic',
-    path: '/author/add-topic',
-    formsCSS: true,
-    productCSS: true,
-    activeAddTopic: true
-  });
-};
+
+  Keyword.findAll().then((allKeywords)=>{
+    Alias.findAll().then((allAliases)=>{res.render('add-topic', {
+      pageTitle: 'Add Topic',
+      path: '/author/add-topic',
+      formsCSS: true,
+      productCSS: true,
+      activeAddTopic: true,
+      allAliases: allAliases,
+      allKeywords: allKeywords
+    })});
+  
+
+  
+});
+}
 
 exports.postAddTopic = (req, res, next) => {
   const domain = req.body.domain;
@@ -18,8 +26,8 @@ exports.postAddTopic = (req, res, next) => {
   const topicId = req.body.topicId;
   const name = req.body.name;
   const difficulty = req.body.difficulty;
-  const keywords = req.body.keywordId;
-  const aliases = req.body.aliasId;
+  const keywords = ((req.body.keyword)?req.body.keyword:req.body.keywordId);
+  const aliases = ((req.body.alias)?req.body.alias:req.body.aliasId);
   const paragraph = req.body.paragraph;
   const content = req.body.content;
 

@@ -30,11 +30,24 @@
             </div>
             <div class="form-control">
                 <label for="keywords">Keywords</label>
-                <input type="text" name="keywordId" id="keywordId">
+                <input list="keywords" name="keyword" id="keyword">
+                <select name="keywords" id="keywords" size="4" multiple>
+                    <%console.log(allKeywords)%>
+                    <% for (const i in allKeywords) {%>
+                        <option value="<%=allKeywords[i].id%>"><%= allKeywords[i].value%></option>
+                        <%}%>
+                </select>
+                
             </div>
             <div class="form-control">
                 <label for="aliases">Aliases</label>
-                <input type="text" name="aliasId" id="aliasId">
+                <input list="aliases" name="alias" id="alias">
+                <select name="aliases" id="aliases" size="4" multiple>
+                    <%console.log(allAliases)%>
+                    <% for (const j in allAliases) {%>
+                        <option value="<%=allAliases[j].id%>"><%= allAliases[j].value%></option>
+                        <%}%>
+                </select>
             </div>
             <div class="form-control">
                 <label for="paragraph">Teaser</label>

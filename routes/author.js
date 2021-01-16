@@ -1,22 +1,15 @@
-const express = require('express');
 const path = require('path');
 
-const rootDir = require('../util/path');
+const express = require('express');
 
-const authorController = require('../controllers/author');
+const topicsController = require('../controllers/author');
 
 const router = express.Router();
 
+// /author/add-topic => GET
+router.get('/add-topic', topicsController.getAddTopic);
 
-router.get('/add-topic', authorController.getAddTopic);
-    
-
-
-router.get('/',(req, res, next)=>{
-    
-    res.sendFile(path.join(rootDir, 'views', 'elm.html'));
-    
-});
-
+// /author/add-topic => POST
+router.post('/add-topic', topicsController.postAddTopic);
 
 module.exports = router;

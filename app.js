@@ -1,4 +1,7 @@
 
+
+const port = 3000;
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -45,8 +48,8 @@ Alias.belongsToMany(Topic, {
 
 sequelize.sync({ force: false }).then(result => {
   console.log(result);
-  console.log('success');
-  app.listen(3000);
+  console.log(`success. App listening on port: ${port}`);
+  app.listen(port);
 }).catch(err => {
   console.log('ERROR!');
   console.log(err);

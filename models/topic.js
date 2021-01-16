@@ -11,7 +11,7 @@ const Topic = sequelize.define('topic', {
       allowNull: false,
       primaryKey: true
   },
-  area: {
+  domain: {
       type: DataTypes.STRING,
       allowNull: false
   },

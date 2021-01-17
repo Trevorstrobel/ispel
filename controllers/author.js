@@ -51,7 +51,7 @@ exports.postAddTopic = (req, res, next) => {
   } else {
    Keyword.findAll({
       id: keywords
-    }).next((newKeywords)=>{
+    }).then((newKeywords)=>{
       newTopic.addKeywords(newKeywords)
     }).catch(err=>console.log(err))
   }
@@ -59,7 +59,7 @@ exports.postAddTopic = (req, res, next) => {
     Alias.create({value: alias}).then((newAlias=>{
       newTopic.addAlias(newAlias)
     })).catch(err=>console.log(err))} else{
-      Alias.findAll({id:aliases}).next((newAliases)=>{
+      Alias.findAll({id:aliases}).then((newAliases)=>{
         newTopic.addAliases(newAliases)
       }).catch(err=>console.log(err))
     }
@@ -70,6 +70,7 @@ exports.postAddTopic = (req, res, next) => {
 };
 
 exports.getTopics = (req, res, next) => {
+  Topic.findAll().then(topics =>{
   res.render('topics', {
     topics: topics,
     pageTitle: 'Topics',
@@ -77,5 +78,13 @@ exports.getTopics = (req, res, next) => {
     hasTopics: topics.length > 0,
     activeTopics: true,
     productCSS: true
-  });
+  })})
 };
+
+exports.getTopic = (req, res, next) =>{
+  const topicId = req.params.topicId;
+
+  Topic.findOne({where:{id:topicId}}).then((topic) =>{
+    res.write(topic.content);
+  });
+}

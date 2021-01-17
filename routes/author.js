@@ -12,4 +12,8 @@ router.get('/add-topic', topicsController.getAddTopic);
 // /author/add-topic => POST
 router.post('/add-topic', topicsController.postAddTopic);
 
+router.get('/',topicsController.getTopics);
+
+router.get('/topic/:topicId', topicsController.getTopic);
+
 module.exports = router;

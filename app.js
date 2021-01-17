@@ -24,7 +24,9 @@ app.set('views', 'views');
 
 
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
-app.use(multer().single('contentUpload'));
+app.use(multer({
+  limits: { fieldSize: 25 * 1024 * 1024 }
+}).single('contentUpload'));
 app.use(express.static(path.join(__dirname, 'public'))); //provide static access to the public folder
 
 app.use('/author', authorRoutes);

@@ -66,7 +66,7 @@ exports.postAddTopic = (req, res, next) => {
   });
 
   console.log(contentFile);
-  res.redirect('/');
+  res.redirect('/author/');
 };
 
 exports.getTopics = (req, res, next) => {

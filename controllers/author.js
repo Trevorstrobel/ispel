@@ -25,6 +25,8 @@ exports.postAddTopic = (req, res, next) => {
   const area = req.body.area;
   const topicId = req.body.topicId;
   const name = req.body.name;
+  const contentFile = req.file;
+  
   const difficulty = req.body.difficulty;
   const keywords = ((req.body.keyword)?req.body.keyword:req.body.keywordId);
   const aliases = ((req.body.alias)?req.body.alias:req.body.aliasId);
@@ -50,7 +52,7 @@ exports.postAddTopic = (req, res, next) => {
     }))
   });
 
-
+  console.log(contentFile);
   res.redirect('/');
 };
 

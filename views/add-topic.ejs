@@ -7,7 +7,7 @@
    <%- include('./includes/navigation.ejs') %>
 
     <main>
-        <form class="product-form" action="/author/add-topic" method="POST">
+        <form class="product-form" action="/author/add-topic" method="POST" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name">
@@ -56,6 +56,17 @@
             <div class="form-control">
                 <label for="content">Content</label>
                 <textarea name="content" id="content" rows="5"></textarea>
+            </div>
+
+            <div class="form-control">
+                <label for="contentUpload">Content file</label>
+                <input
+                type="file"
+                name="contentUpload"
+                id="contentUpload"
+                accept="*.rmd"
+                >
+
             </div>
 
             <button class="btn" type="submit">Add Topic</button>

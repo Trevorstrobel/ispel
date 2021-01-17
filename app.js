@@ -5,6 +5,7 @@ const PORT = 3000;
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const multer = require("multer");
 
 const authorRoutes = require('./routes/author');
 
@@ -23,6 +24,7 @@ app.set('views', 'views');
 
 
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+app.use(multer().single('contentUpload'));
 app.use(express.static(path.join(__dirname, 'public'))); //provide static access to the public folder
 
 app.use('/author', authorRoutes);

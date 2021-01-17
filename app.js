@@ -48,7 +48,7 @@ Alias.belongsToMany(Topic, {
 });
 
 
-sequelize.sync({ force: true }).then(result => {
+sequelize.sync({ force: false }).then(result => {
   console.log(result);
   console.log(`success. App listening on port: ${PORT}`);
   app.listen(PORT);

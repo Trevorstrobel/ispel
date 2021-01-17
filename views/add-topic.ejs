@@ -1,6 +1,27 @@
 <%- include('./includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/product.css">
+
+    <script>
+        function keywordInput(keywordInpt)
+        {
+            if (keywordInpt.value.length>0){
+                document.getElementById('keywords').disabled = true;
+            } else 
+            {
+                document.getElementById('keywords').disabled = false;
+            }
+        }
+        function aliasInput(aliasInpt)
+        {
+            if (aliasInpt.value.length>0){
+                document.getElementById('aliases').disabled = true;
+            } else 
+            {
+                document.getElementById('aliases').disabled = false;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -30,7 +51,7 @@
             </div>
             <div class="form-control">
                 <label for="keywords">Keywords</label>
-                <input list="keywords" name="keyword" id="keyword">
+                <input list="keywords" name="keyword" id="keyword" onchange="keywordInput(this)">
                 <select name="keywords" id="keywords" size="4" multiple>
                     <%console.log(allKeywords)%>
                     <% for (const i in allKeywords) {%>
@@ -41,7 +62,7 @@
             </div>
             <div class="form-control">
                 <label for="aliases">Aliases</label>
-                <input list="aliases" name="alias" id="alias">
+                <input list="aliases" name="alias" id="alias" onchange="aliasInput(this)">
                 <select name="aliases" id="aliases" size="4" multiple>
                     <%console.log(allAliases)%>
                     <% for (const j in allAliases) {%>

@@ -1,9 +1,10 @@
+//import data models
 const Keyword = require('../models/keyword');
 const Topic = require('../models/topic');
 const Alias = require('../models/alias');
 
+//controller for GET add-topic
 exports.getAddTopic = (req, res, next) => {
-
   Keyword.findAll().then((allKeywords)=>{
     Alias.findAll().then((allAliases)=>{res.render('add-topic', {
       pageTitle: 'Add Topic',
@@ -14,22 +15,21 @@ exports.getAddTopic = (req, res, next) => {
       allAliases: allAliases,
       allKeywords: allKeywords
     })});
-  
-
-  
 });
 }
 
+//controller for POST add-topic
 exports.postAddTopic = (req, res, next) => {
   const domain = req.body.domain;
   const area = req.body.area;
   const topicId = req.body.topicId;
   const name = req.body.name;
-  const contentFile = req.file;
-  
+  const contentFile = req.file; 
   const difficulty = req.body.difficulty;
-  const keywords = ((req.body.keyword)?req.body.keyword:req.body.keywordId);
-  const aliases = ((req.body.alias)?req.body.alias:req.body.aliasId);
+  const keyword = req.body.keyword;
+  const keywords = req.body.keywords;
+  const alias =  req.body.alias;
+  const aliases = req.body.aliases;
   const paragraph = req.body.paragraph;
   const content = req.body.content;
 
@@ -42,14 +42,27 @@ exports.postAddTopic = (req, res, next) => {
     teaser: paragraph,
     content: content
   }).then((newTopic) => {
+    if (keyword) { //checks if keyword input field was used
     Keyword.create({
-      value: keywords
+      value: keyword
     }).then((newKeyword) => {
       newTopic.addKeyword(newKeyword)
-    });
-    Alias.create({value: aliases}).then((newAlias=>{
+    }).catch(err=>console.log(err));
+  } else {
+   Keyword.findAll({
+      id: keywords
+    }).next((newKeywords)=>{
+      newTopic.addKeywords(newKeywords)
+    }).catch(err=>console.log(err))
+  }
+    if(alias){ //checks if alias input field was used
+    Alias.create({value: alias}).then((newAlias=>{
       newTopic.addAlias(newAlias)
-    }))
+    })).catch(err=>console.log(err))} else{
+      Alias.findAll({id:aliases}).next((newAliases)=>{
+        newTopic.addAliases(newAliases)
+      }).catch(err=>console.log(err))
+    }
   });
 
   console.log(contentFile);

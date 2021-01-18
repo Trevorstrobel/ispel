@@ -39,6 +39,10 @@ const Topic = sequelize.define('topic', {
   content: { 
     type: DataTypes.TEXT,
     allowNull: false
+},
+contentHtml: {
+    type: DataTypes.STRING,
+    allowNull: true
 }
 
 });

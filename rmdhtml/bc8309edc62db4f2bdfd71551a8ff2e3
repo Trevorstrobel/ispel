@@ -1,0 +1,27 @@
+---
+title: "Topic prerequisite dependency graph"
+author: "V.N. Gudivada"
+date: "12/28/2020"
+output: html_document
+---
+
+  
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r libraries, include=FALSE}
+library("tidyverse")
+library("visNetwork")
+library("igraph")
+```
+
+```{r, echo=FALSE}
+topic_nodes <- read_csv("data/topic_nodes.csv")
+topic_edges <- read_csv("data/topic_edges.csv")
+
+visNetwork(topic_nodes,topic_edges) %>%
+  visEdges(color="purple", arrows = "to") %>%
+  visLegend() %>%
+  visOptions(highlightNearest = list(enabled = T, degree = 2, hover = T))
+```

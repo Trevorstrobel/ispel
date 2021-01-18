@@ -8,6 +8,7 @@ const path = require('path');
 const multer = require("multer");
 
 const authorRoutes = require('./routes/author');
+const userRoutes = require('./routes/user');
 
 const sequelize = require('./util/database');
 
@@ -19,17 +20,32 @@ const TopicAlias = require('./models/topic-alias');
 
 const app = express();
 
+const fileStorage = multer.diskStorage({
+  destination:(req, file, cb)=>{
+    cb(null, 'rmdhtml');
+  },
+  filename: (req, file, cb)=>{
+    cb(null, new Date().toDateString + '-'+file.originalname)
+  }
+});
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(multer({
-  limits: { fieldSize: 25 * 1024 * 1024 }
-}).single('contentUpload'));
+  limits: { fieldSize: 25 * 1024 * 1024 },
+  storage: fileStorage
+}
+
+).single('contentUpload'));
 app.use(express.static(path.join(__dirname, 'public'))); //provide static access to the public folder
+app.use('/rmdhtml', express.static(path.join(__dirname, 'rmdhtml')));
 
 app.use('/author', authorRoutes);
+
+app.use('/', userRoutes);
 
 app.use((req, res, next) => {
   res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));

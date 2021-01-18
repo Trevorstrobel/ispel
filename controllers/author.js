@@ -1,7 +1,10 @@
+const nodePandoc = require('node-pandoc');
+
 //import data models
 const Keyword = require('../models/keyword');
 const Topic = require('../models/topic');
 const Alias = require('../models/alias');
+
 
 //controller for GET add-topic
 exports.getAddTopic = (req, res, next) => {
@@ -32,6 +35,8 @@ exports.postAddTopic = (req, res, next) => {
   const aliases = req.body.aliases;
   const paragraph = req.body.paragraph;
   const content = req.body.content;
+  
+  
 
   Topic.create({
     domain: domain,
@@ -40,7 +45,8 @@ exports.postAddTopic = (req, res, next) => {
     topicId: topicId,
     name: name,
     teaser: paragraph,
-    content: content
+    content: content,
+    contentHtml: contentFile.path
   }).then((newTopic) => {
     if (keyword) { //checks if keyword input field was used
     Keyword.create({

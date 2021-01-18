@@ -46,7 +46,7 @@ exports.postAddTopic = (req, res, next) => {
     name: name,
     teaser: paragraph,
     content: content,
-    contentHtml: contentFile.path
+    //contentHtml: contentFile.path
   }).then((newTopic) => {
     if (keyword) { //checks if keyword input field was used
     Keyword.create({

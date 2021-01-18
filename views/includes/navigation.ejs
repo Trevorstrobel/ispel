@@ -1,8 +1,19 @@
+<header class="main-sidebar">
+    <nav class="main-sidebar__nav">
+        <ul class="main-sidebar__item-list">
+            <li class="main-sidebar__item"><a class="" href="">Homepage</a></li>
+            <li class="main-sidebar__item"><a class="<%= path === '/author/' ? 'active' : '' %>" href="/author/">Topics</a></li>
+            <li class="main-sidebar__item"><a class="<%= path === '/author/add-topic' ? 'active' : '' %>" href="/author/add-topic">Add Topic</a></li>
+        </ul>
+    </nav>
+</header> 
+
+<!--Main Header-->
 <header class="main-header">
     <nav class="main-header__nav">
         <ul class="main-header__item-list">
-            <li class="main-header__item"><a class="<%= path === '/author/' ? 'active' : '' %>" href="/author/">Topics</a></li>
-            <li class="main-header__item"><a class="<%= path === '/author/add-topic' ? 'active' : '' %>" href="/author/add-topic">Add Topic</a></li>
+            <li class="main-header__page-title"><%= pageTitle %></li>
+            <!--<li class="main-header__item"><a class="<%= path === '/author/' ? 'active' : '' %>" href="/author/">Topics</a></li> -->
         </ul>
     </nav>
 </header>

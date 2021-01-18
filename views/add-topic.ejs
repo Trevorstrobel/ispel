@@ -27,70 +27,82 @@
 <body>
    <%- include('./includes/navigation.ejs') %>
 
-    <main>
-        <form class="product-form" action="/author/add-topic" method="POST" enctype="multipart/form-data">
-            <div class="form-control">
-                <label for="domain">Domain Name</label>
-                <input type="text" name="domain" id="domain">
-            </div>
-            <div class="form-control">
-                <label for="area">Topic Area</label>
-                <input type="text" name="area" id="area">
-            </div>
-            <div class="form-control">
-                <label for="name">Topic Name</label>
-                <input type="text" name="name" id="name">
-            </div>
-            <div class="form-control">
-                <label for="topicId">Topic ID | to be auto-generated</label>
-                <input type="text" name="topicId" id="topicId">
-            </div>
-            <div class="form-control">
-                <label for="difficulty">Difficulty</label>
-                <input type="number" name="difficulty" id="difficulty">
-            </div>
-            <div class="form-control">
-                <label for="keywords">Keywords</label>
-                <input list="keywords" name="keyword" id="keyword" onchange="keywordInput(this)">
-                <select name="keywords" id="keywords" size="4" multiple>
-                    <%console.log(allKeywords)%>
-                    <% for (const i in allKeywords) {%>
-                        <option value="<%=allKeywords[i].id%>"><%= allKeywords[i].value%></option>
-                        <%}%>
-                </select>
-                
-            </div>
-            <div class="form-control">
-                <label for="aliases">Aliases</label>
-                <input list="aliases" name="alias" id="alias" onchange="aliasInput(this)">
-                <select name="aliases" id="aliases" size="4" multiple>
-                    <%console.log(allAliases)%>
-                    <% for (const j in allAliases) {%>
-                        <option value="<%=allAliases[j].id%>"><%= allAliases[j].value%></option>
-                        <%}%>
-                </select>
-            </div>
-            <div class="form-control">
-                <label for="paragraph">Teaser</label>
-                <textarea name="paragraph" id="paragraph" rows="5"></textarea>
-            </div>
-            <div class="form-control">
-                <label for="content">Content</label>
-                <textarea name="content" id="content" rows="5"></textarea>
-            </div>
+   <div class="container py-5">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <form action="/author/add-topic" method="POST" enctype="multipart/form-data">
+                <div class="form-group row">
 
-            <div class="form-control">
-                <label for="contentUpload">Content file</label>
-                <input
-                type="file"
-                name="contentUpload"
-                id="contentUpload"
-                accept=".html"
-                >
+                    <div class="col-sm-4">
+                        <label for="area">Topic Area</label>
+                        <input type="text" class="form-control" name="area" id="area">
 
-            </div>
+                    </div>
 
-            <button class="btn" type="submit">Add Topic</button>
-        </form>
-    </main>
+                    <div class="col-sm-4">
+                        <label for="topicId">Topic ID | to be auto-generated</label>
+                        <input type="text" class="form-control" name="topicId" id="topicId">
+
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="name">Topic Name</label>
+                        <input type="text" class="form-control" name="name" id="name">
+
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4">
+                        <label for="difficulty">Difficulty</label>
+                        <input type="number" class="form-control" name="difficulty" id="difficulty">
+                        <br>
+                        <label for="domain">Domain Name</label>
+                        <input type="text" class="form-control" name="domain" id="domain">
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="keywords">Keywords</label>
+                        <input list="keywords" class="form-control" name="keyword" id="keyword"
+                            onchange="keywordInput(this)">
+                        <select name="keywords" class="form-control" id="keywords" size="4" multiple>
+                            <%console.log(allKeywords)%>
+                                <% for (const i in allKeywords) {%>
+                                    <option value="<%=allKeywords[i].id%>">
+                                        <%= allKeywords[i].value%>
+                                    </option>
+                                    <%}%>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="aliases">Aliases</label>
+                        <input list="aliases" class="form-control" name="alias" id="alias"
+                            onchange="aliasInput(this)">
+                        <select name="aliases" class="form-control" id="aliases" size="4" multiple>
+                            <%console.log(allAliases)%>
+                                <% for (const j in allAliases) {%>
+                                    <option value="<%=allAliases[j].id%>">
+                                        <%= allAliases[j].value%>
+                                    </option>
+                                    <%}%>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <label for="paragraph">Teaser</label>
+                        <textarea name="paragraph" class="form-control" id="paragraph" rows="10"></textarea>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="content">Content</label>
+                        <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+                    </div>
+
+                </div>
+               
+                <button type="button" class="btn btn-primary px-4 float-right">Add Topic</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <%- include('./includes/end.ejs') %>

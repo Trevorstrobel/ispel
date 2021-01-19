@@ -24,11 +24,12 @@ const Topic = sequelize.define('topic', {
       type:DataTypes.TEXT,
       allowNull: false
   },
-  content: { 
-    type: DataTypes.TEXT,
+ 
+contentHtml: {
+    type: DataTypes.STRING,
     allowNull: false
 },
-contentHtml: {
+contentRmd: {
     type: DataTypes.STRING,
     allowNull: true
 }

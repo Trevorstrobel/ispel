@@ -24,12 +24,22 @@ const Area = require('./models/area');
 
 const app = express();
 
+const fileFilter = (req, file, cb) => {
+  const ext = path.extname(file.originalname);
+  if (ext.toLowerCase() !== '.html' && ext.toLowerCase() !== '.rmd') {
+    console.log(ext);
+    cb(new Error('Wronf file type'), false)
+  } else {
+    cb(null, true);
+  }
+};
+
 const fileStorage = multer.diskStorage({
-  destination:(req, file, cb)=>{
+  destination: (req, file, cb) => {
     cb(null, 'rmdhtml');
   },
-  filename: (req, file, cb)=>{
-    cb(null, new Date().toDateString + '-'+file.originalname)
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
   }
 });
 
@@ -40,12 +50,11 @@ app.set('views', 'views');
 app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
 app.use(multer({
   limits: { fieldSize: 25 * 1024 * 1024 },
-  storage: fileStorage
-}
-
-).single('contentUpload'));
+  storage: fileStorage,
+  fileFilter: fileFilter
+}).fields([{ name: 'contentUpload', maxCount: 1 }, { name: 'rmdUpload', maxCount: 1 }]));
 app.use(express.static(path.join(__dirname, 'public'))); //provide static access to the public folder
-app.use('/rmdhtml', express.static(path.join(__dirname, 'rmdhtml')));
+app.use('/author/topic/rmdhtml', express.static(path.join(__dirname, 'rmdhtml')));
 
 app.use('/author', authorRoutes);
 app.use('/admin', adminRoutes);

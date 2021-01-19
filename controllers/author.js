@@ -39,14 +39,16 @@ exports.postAddTopic = (req, res, next) => {
   console.log(area);
   const topicId = req.body.topicId;
   const name = req.body.name;
-  const contentFile = req.file;
+  const contentFile = req.files['contentUpload'][0];
+  const rmdFile = ((typeof req.files['rmdUpload']!=='undefined')?req.files['rmdUpload'][0]:null);
   const difficulty = req.body.difficulty;
   const keyword = req.body.keyword;
   const keywords = req.body.keywords;
   const alias = req.body.alias;
   const aliases = req.body.aliases;
   const paragraph = req.body.paragraph;
-  const content = req.body.content;
+
+ 
 
 
 
@@ -57,8 +59,8 @@ exports.postAddTopic = (req, res, next) => {
     topicId: topicId,
     name: name,
     teaser: paragraph,
-    content: content,
-    //contentHtml: contentFile.path
+    contentHtml: contentFile.path,
+    contentRmd: ((rmdFile)?rmdFile.path:null)
   }).then((newTopic) => {
     if (keyword) { //checks if keyword input field was used
       Keyword.create({
@@ -106,6 +108,12 @@ exports.getTopic = (req, res, next) => {
   const topicId = req.params.topicId;
 
   Topic.findOne({ where: { id: topicId } }).then((topic) => {
-    res.write(topic.content);
+    res.render('topic', {
+      topic: topic,
+      pageTitle: 'Topic',
+      path: '/topic/'+topicId,
+      activeTopics: true,
+      productCSS: true
+    })
   });
 }

@@ -1,24 +1,28 @@
+<div class="wrapper">
 <header class="main-sidebar">
 
-    <nav class="navbar navbar-light bg-light">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="">Homepage</a>
+    <nav id="sidebar">
+        <ul class="list-unstyled components">
+            <li>
+                <a href="/author/">Homepage</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/author/">Topics</a>
+            <li>
+                <a href="/author/">Topics</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/author/add-topic">Add Topic</a>
+            <li>
+                <a href="/author/add-topic">Add Topic</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+            <li>
+                <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     Admin
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/admin/add-domain">Add Domain</a></li>
-                    <li><a class="dropdown-item" href="/admin/add-area">Add Area</a></li>
+                <ul class="collapse list-unstyled" id="adminSubmenu">
+                    <li>
+                        <a class="dropdown-item" href="/admin/add-domain">Add Domain</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/admin/add-area">Add Area</a>
+                    </li>
                 </ul>
             </li>
         </ul>

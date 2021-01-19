@@ -35,7 +35,13 @@
 
                     <div class="col-sm-4">
                         <label for="area">Topic Area</label>
-                        <input type="text" class="form-control" name="area" id="area">
+                        <select type="text" class="form-control" name="area" id="area">
+                            <% for (const i in allAreas) {%>
+                                <option value="<%=allAreas[i].id%>">
+                                    <%= allAreas[i].name%>
+                                </option>
+                                <%}%>
+                        </select>
 
                     </div>
 
@@ -54,18 +60,23 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4">
-                        <label for="difficulty">Difficulty</label>
-                        <input type="number" class="form-control" name="difficulty" id="difficulty">
-                        <br>
+                       
                         <label for="domain">Domain Name</label>
-                        <input type="text" class="form-control" name="domain" id="domain">
+                        <select type="text" class="form-control" name="domain" id="domain" disabled>
+                            <% for (const i in allDomains) {%>
+                                <option value="<%=allDomains[i].id%>">
+                                    <%= allDomains[i].name%>
+                                </option>
+                                <%}%>
+                        </select>
+
                     </div>
                     <div class="col-sm-4">
                         <label for="keywords">Keywords</label>
                         <input list="keywords" class="form-control" name="keyword" id="keyword"
                             onchange="keywordInput(this)">
                         <select name="keywords" class="form-control" id="keywords" size="4" multiple>
-                            <%console.log(allKeywords)%>
+                           
                                 <% for (const i in allKeywords) {%>
                                     <option value="<%=allKeywords[i].id%>">
                                         <%= allKeywords[i].value%>

@@ -9,6 +9,7 @@ const multer = require("multer");
 
 const authorRoutes = require('./routes/author');
 const userRoutes = require('./routes/user');
+const adminRoutes = require('./routes/admin');
 
 const sequelize = require('./util/database');
 
@@ -17,6 +18,9 @@ const Keyword = require('./models/keyword');
 const TopicKeyword = require('./models/topic-keyword');
 const Alias = require('./models/alias');
 const TopicAlias = require('./models/topic-alias');
+const Domain = require('./models/domain');
+const Area = require('./models/area');
+
 
 const app = express();
 
@@ -44,6 +48,7 @@ app.use(express.static(path.join(__dirname, 'public'))); //provide static access
 app.use('/rmdhtml', express.static(path.join(__dirname, 'rmdhtml')));
 
 app.use('/author', authorRoutes);
+app.use('/admin', adminRoutes);
 
 app.use('/', userRoutes);
 
@@ -64,6 +69,12 @@ Topic.belongsToMany(Alias, {
 Alias.belongsToMany(Topic, {
   through: TopicAlias
 });
+
+Area.belongsTo(Domain);
+
+Topic.belongsTo(Area);
+
+
 
 
 sequelize.sync({ force: false }).then(result => {

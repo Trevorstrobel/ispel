@@ -11,18 +11,6 @@ const Topic = sequelize.define('topic', {
       allowNull: false,
       primaryKey: true
   },
-  domain: {
-      type: DataTypes.STRING,
-      allowNull: false
-  },
-  area: {
-      type: DataTypes.STRING,
-      allowNull: false
-  },
-  difficulty: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-  },
   topicId: {
       type: DataTypes.STRING,
       allowNull: false

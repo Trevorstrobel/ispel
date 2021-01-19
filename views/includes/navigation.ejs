@@ -1,18 +1,58 @@
 <header class="main-sidebar">
-    <nav class="main-sidebar__nav">
+
+    <nav class="navbar navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author/">Topics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/author/add-topic">Add Topic</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Admin
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/admin/add-domain">Add Domain</a></li>
+                    <li><a class="dropdown-item" href="/admin/add-area">Add Area</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
+
+    <!-- <nav class="main-sidebar__nav">
         <ul class="main-sidebar__item-list">
             <li class="main-sidebar__item"><a class="" href="">Homepage</a></li>
-            <li class="main-sidebar__item"><a class="<%= path === '/author/' ? 'active' : '' %>" href="/author/">Topics</a></li>
-            <li class="main-sidebar__item"><a class="<%= path === '/author/add-topic' ? 'active' : '' %>" href="/author/add-topic">Add Topic</a></li>
+            <li class="main-sidebar__item"><a class="<%= path === '/author/' ? 'active' : '' %>"
+                    href="/author/">Topics</a></li>
+            <li class="main-sidebar__item"><a class="<%= path === '/author/add-topic' ? 'active' : '' %>"
+                    href="/author/add-topic">Add Topic</a></li>
+            <li class="main-sidebar__item">
+                <button class="dropdown-btn">Admin</button>
+                <div class="dropdown-container">
+                    <a  href="/admin/add-domain">Add
+                        Domain</a>
+                        <a  href="/admin/add-area">Add
+                            Area</a>
+                </div>
+
+            </li>
         </ul>
-    </nav>
-</header> 
+    </nav> -->
+</header>
 
 <!--Main Header-->
 <header class="main-header">
     <nav class="main-header__nav">
         <ul class="main-header__item-list">
-            <li class="main-header__page-title"><%= pageTitle %></li>
+            <li class="main-header__page-title">
+                <%= pageTitle %>
+            </li>
             <!--<li class="main-header__item"><a class="<%= path === '/author/' ? 'active' : '' %>" href="/author/">Topics</a></li> -->
         </ul>
     </nav>

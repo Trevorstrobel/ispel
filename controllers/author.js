@@ -82,11 +82,11 @@ exports.postAddTopic = (req, res, next) => {
         newTopic.addAliases(newAliases)
       }).catch(err => console.log(err))
     }
-    newTopic.setArea(area);
+    newTopic.setArea(area).then(()=>res.redirect('/author/'));
   });
 
-  console.log(contentFile);
-  res.redirect('/author/');
+  
+  
 };
 
 exports.getTopics = (req, res, next) => {

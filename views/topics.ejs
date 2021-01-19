@@ -2,18 +2,35 @@
     <link rel="stylesheet" href="/css/forms.css">
     <link rel="stylesheet" href="/css/product.css">
 
-</head>
+    </head>
 
-<body>
-   <%- include('./includes/navigation.ejs') %>
+    <body>
+        <%- include('./includes/navigation.ejs') %>
+            <div class="container py-5">
+                <div class="col-md-12 mx-auto">
+                    <div class=row>
+                        <div class="col-12">
+                            <h2>List of Topics</h2>
+                        </div>
+                    </div>
 
-    <main>
-        <%for (const i in topics) {%>
+                    <%for (const i in topics) {%>
+                        <div class="row">
+                            <div class="col-4">
+                                <%=topics[i].name%>
+                            </div>
+                            <div class="col-4">
+                                <%=topics[i].topicId%>
+                            </div>
+                            <div class="col-4">
+                                <a href="/author/topic/<%=topics[i].id%>">
+                                    Content
+                                </a>
+                            </div>
+                        </div>
 
-            <p>
-                <a href="/author/topic/<%=topics[i].id%>"><%=topics[i].name%></a>
-            </p>
+                        <%}%>
+                </div>
 
-        <%}%>
-    </main>
-<%- include('./includes/end.ejs') %>
+            </div>
+            <%- include('./includes/end.ejs') %>

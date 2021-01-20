@@ -17,8 +17,8 @@
             }
         }
 
-        function onNameChange(topicNameField){
-            let name = topicNameField.value.toLowerCase().replace(/ /g,"_");
+        function onNameChange(){
+            let name = document.getElementById('name').value.toLowerCase().replace(/ /g,"_");
             let value = JSON.parse(document.getElementById('domain').value)['code']+":"+JSON.parse(document.getElementById('area').value)['code']+":";
             document.getElementById("topicId").value = value+name;
 
@@ -67,7 +67,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="name">Topic Name</label>
-                                        <input type="text" class="form-control" name="name" id="name" onkeyup="onNameChange(this)">
+                                        <input type="text" class="form-control" name="name" id="name" onkeyup="onNameChange()">
 
                                     </div>
 
@@ -75,7 +75,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-4">
                                         <label for="area">Topic Area</label>
-                                        <select type="text" class="form-control" name="area" id="area">
+                                        <select type="text" class="form-control" name="area" id="area" onchange="onNameChange()">
                                             <% for (const i in allAreas) {%>
                                                 <option value='{"id":"<%=allAreas[i].id%>","code":"<%=allAreas[i].shortName%>"}'>
                                                     <%= allAreas[i].name%>

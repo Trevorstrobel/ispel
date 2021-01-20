@@ -34,7 +34,9 @@ exports.getAddTopic = (req, res, next) => {
 //controller for POST add-topic
 exports.postAddTopic = (req, res, next) => {
   const domain = req.body.domain;
-  const area = req.body.area;
+  const areaJson = JSON.parse(req.body.area);
+  const area = areaJson['id'];
+
   console.log("area");
   console.log(area);
   const topicId = req.body.topicId;
@@ -69,18 +71,18 @@ exports.postAddTopic = (req, res, next) => {
         newTopic.addKeyword(newKeyword)
       }).catch(err => console.log(err));
     } else {
-      Keyword.findAll({
+      Keyword.findAll({where:{
         id: keywords
-      }).then((newKeywords) => {
+      }}).then((newKeywords) => {
         newTopic.addKeywords(newKeywords)
       }).catch(err => console.log(err))
     }
     if (alias) { //checks if alias input field was used
-      Alias.create({ value: alias }).then((newAlias => {
+      Alias.create({where:{ value: alias }}).then((newAlias => {
         newTopic.addAlias(newAlias)
       })).catch(err => console.log(err))
     } else {
-      Alias.findAll({ id: aliases }).then((newAliases) => {
+      Alias.findAll({where:{ id: aliases }}).then((newAliases) => {
         newTopic.addAliases(newAliases)
       }).catch(err => console.log(err))
     }

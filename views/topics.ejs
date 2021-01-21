@@ -1,6 +1,6 @@
 <%- include('./includes/head.ejs') %>
     <link rel="stylesheet" href="/css/forms.css">
-    
+
 
     </head>
 
@@ -14,7 +14,7 @@
                         </div>
                     </div>
 
-                    <%for (const i in topics) {%>
+                    <%for (const i in topics) { if (!isAdmin) { %>
                         <div class="row">
                             <div class="col-4">
                                 <%=topics[i].name%>
@@ -28,8 +28,24 @@
                                 </a>
                             </div>
                         </div>
-
-                        <%}%>
+                        <%} else {%>
+                            <div class="row">
+                                <div class="col-3">
+                                    <%=topics[i].name%>
+                                </div>
+                                <div class="col-3">
+                                    <%=topics[i].topicId%>
+                                </div>
+                                <div class="col-3">
+                                    <%=topics[i].userId%>
+                                </div>
+                                <div class="col-3">
+                                    <a href="/author/topic/<%=topics[i].id%>">
+                                        Content
+                                    </a>
+                                </div>
+                            </div>
+                            <%}}%>
                 </div>
 
             </div>

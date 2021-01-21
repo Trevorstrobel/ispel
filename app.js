@@ -26,6 +26,7 @@ const Alias = require('./models/alias');
 const TopicAlias = require('./models/topic-alias');
 const Domain = require('./models/domain');
 const Area = require('./models/area');
+const User = require('./models/user');
 
 
 const app = express();
@@ -97,6 +98,8 @@ Alias.belongsToMany(Topic, {
 Area.belongsTo(Domain);
 
 Topic.belongsTo(Area);
+
+Topic.belongsTo(User);
 
 
 

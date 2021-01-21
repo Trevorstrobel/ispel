@@ -54,10 +54,6 @@ exports.postAddTopic = (req, res, next) => {
   const aliases = req.body.aliases;
   const paragraph = req.body.paragraph;
 
- 
-
-
-
   Topic.create({
     domain: domain,
     areId: area,
@@ -68,6 +64,7 @@ exports.postAddTopic = (req, res, next) => {
     contentHtml: contentFile.path,
     contentRmd: ((rmdFile)?rmdFile.path:null)
   }).then((newTopic) => {
+    newTopic.setUser(req.session.user.id);
     if (keyword) { //checks if keyword input field was used
       Keyword.create({
         value: keyword
@@ -82,7 +79,7 @@ exports.postAddTopic = (req, res, next) => {
       }).catch(err => console.log(err))
     }
     if (alias) { //checks if alias input field was used
-      Alias.create({where:{ value: alias }}).then((newAlias => {
+      Alias.create({ value: alias }).then((newAlias => {
         newTopic.addAlias(newAlias)
       })).catch(err => console.log(err))
     } else {
@@ -99,7 +96,8 @@ exports.postAddTopic = (req, res, next) => {
 
 exports.getTopics = (req, res, next) => {
   
-  Topic.findAll().then(topics => {
+  if (req.session.isAdmin){
+    Topic.findAll().then(topics =>{
     res.render('topics', {
       topics: topics,
       pageTitle: 'Topics',
@@ -109,8 +107,18 @@ exports.getTopics = (req, res, next) => {
       productCSS: true,
       isAuthenticated: req.session.isLoggedIn,
       isAdmin: req.session.isAdmin
-    })
-  })
+    })})} else {
+    Topic.findAll({where:{userId:req.session.user.id}}).then(topics =>{
+      res.render('topics', {
+        topics: topics,
+        pageTitle: 'Topics',
+        path: '/',
+        hasTopics: topics.length > 0,
+        activeTopics: true,
+        productCSS: true,
+        isAuthenticated: req.session.isLoggedIn,
+        isAdmin: req.session.isAdmin
+      })})}
 };
 
 exports.getTopic = (req, res, next) => {

@@ -10,6 +10,7 @@ const Area = require('../models/area');
 
 //controller for GET add-topic
 exports.getAddTopic = (req, res, next) => {
+ 
   Keyword.findAll().then((allKeywords) => {
     Alias.findAll().then((allAliases) => {
       Domain.findAll({ where: { id: 2 } }).then((allDomains) => {
@@ -23,7 +24,8 @@ exports.getAddTopic = (req, res, next) => {
             allAliases: allAliases,
             allKeywords: allKeywords,
             allDomains: allDomains,
-            allAreas: allAreas
+            allAreas: allAreas,
+            isAuthenticated: req.session.isLoggedIn
           })
         })
       })
@@ -33,6 +35,7 @@ exports.getAddTopic = (req, res, next) => {
 
 //controller for POST add-topic
 exports.postAddTopic = (req, res, next) => {
+  
   const domain = req.body.domain;
   const areaJson = JSON.parse(req.body.area);
   const area = areaJson['id'];
@@ -94,6 +97,7 @@ exports.postAddTopic = (req, res, next) => {
 };
 
 exports.getTopics = (req, res, next) => {
+  
   Topic.findAll().then(topics => {
     res.render('topics', {
       topics: topics,
@@ -101,12 +105,14 @@ exports.getTopics = (req, res, next) => {
       path: '/',
       hasTopics: topics.length > 0,
       activeTopics: true,
-      productCSS: true
+      productCSS: true,
+      isAuthenticated: req.session.isLoggedIn
     })
   })
 };
 
 exports.getTopic = (req, res, next) => {
+
   const topicId = req.params.topicId;
 
   Topic.findOne({ where: { id: topicId } }).then((topic) => {

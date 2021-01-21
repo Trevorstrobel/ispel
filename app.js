@@ -6,10 +6,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const multer = require("multer");
+var session = require('express-session');
+
+
+// initalize sequelize with session store
+var SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const authorRoutes = require('./routes/author');
 const userRoutes = require('./routes/user');
 const adminRoutes = require('./routes/admin');
+const authenticationRoutes = require('./routes/auth');
 
 const sequelize = require('./util/database');
 
@@ -47,7 +53,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 
-app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(multer({
   limits: { fieldSize: 25 * 1024 * 1024 },
   storage: fileStorage,
@@ -56,8 +62,17 @@ app.use(multer({
 app.use(express.static(path.join(__dirname, 'public'))); //provide static access to the public folder
 app.use('/author/topic/rmdhtml', express.static(path.join(__dirname, 'rmdhtml')));
 
+app.use(session({
+  secret: 'ecusessionsecret',
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+  resave: false, saveUninitialized: false
+}));
+
 app.use('/author', authorRoutes);
 app.use('/admin', adminRoutes);
+app.use('/auth', authenticationRoutes);
 
 app.use('/', userRoutes);
 

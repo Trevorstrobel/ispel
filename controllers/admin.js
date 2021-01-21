@@ -2,12 +2,16 @@ const Domain = require('../models/domain');
 const Area = require('../models/area');
 
 exports.getAddDomain = (req, res, next) => {
+    if(!req.session.isLoggedIn) {
+        return res.redirect('/auth/login');
+      }
     res.render('add-domain', {
         pageTitle: 'Add Domain',
         path: '/admin/add-domain',
         formsCSS: true,
         productCSS: true,
-        activeAddTopic: true
+        activeAddTopic: true,
+        isAuthenticated: req.session.isLoggedIn
     })
 }
 
@@ -24,6 +28,9 @@ exports.postAddDomain = (req, res, next) => {
 
 
 exports.getAddArea = (req, res, next) => {
+    if(!req.session.isLoggedIn) {
+        return res.redirect('/auth/login');
+      }
     Domain.findAll().then((domains) =>{
     res.render('add-area', {
         pageTitle: 'Add Area',
@@ -31,7 +38,8 @@ exports.getAddArea = (req, res, next) => {
         domains: domains,
         formsCSS: true,
         productCSS: true,
-        activeAddTopic: true
+        activeAddTopic: true,
+        isAuthenticated: req.session.isLoggedIn
     })})
 }
 

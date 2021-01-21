@@ -11,7 +11,8 @@ exports.getAddDomain = (req, res, next) => {
         formsCSS: true,
         productCSS: true,
         activeAddTopic: true,
-        isAuthenticated: req.session.isLoggedIn
+        isAuthenticated: req.session.isLoggedIn,
+        isAdmin: req.session.isAdmin
     })
 }
 
@@ -39,7 +40,8 @@ exports.getAddArea = (req, res, next) => {
         formsCSS: true,
         productCSS: true,
         activeAddTopic: true,
-        isAuthenticated: req.session.isLoggedIn
+        isAuthenticated: req.session.isLoggedIn,
+        isAdmin: req.session.isAdmin
     })})
 }
 

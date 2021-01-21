@@ -6,7 +6,8 @@ exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
-    isAuthenticated: false
+    isAuthenticated: false,
+    isAdmin: false
   });
 };
 
@@ -14,14 +15,15 @@ exports.getSignup = (req, res, next) => {
   res.render('auth/signup', {
     path: '/signup',
     pageTitle: 'Signup',
-    isAuthenticated: false
+    isAuthenticated: false,
+    isAdmin: false
   });
 };
 
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  User.findOne({ email: email })
+  User.findOne({where:{ email: email }})
     .then(user => {
       if (!user) {
         return res.redirect('/login');
@@ -32,6 +34,7 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+            req.session.isAdmin = user.admin;
             return req.session.save(err => {
               console.log(err);
               res.redirect('/author/');

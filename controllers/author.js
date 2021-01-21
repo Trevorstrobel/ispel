@@ -25,7 +25,8 @@ exports.getAddTopic = (req, res, next) => {
             allKeywords: allKeywords,
             allDomains: allDomains,
             allAreas: allAreas,
-            isAuthenticated: req.session.isLoggedIn
+            isAuthenticated: req.session.isLoggedIn,
+            isAdmin: req.session.isAdmin
           })
         })
       })
@@ -106,7 +107,8 @@ exports.getTopics = (req, res, next) => {
       hasTopics: topics.length > 0,
       activeTopics: true,
       productCSS: true,
-      isAuthenticated: req.session.isLoggedIn
+      isAuthenticated: req.session.isLoggedIn,
+      isAdmin: req.session.isAdmin
     })
   })
 };
@@ -121,7 +123,8 @@ exports.getTopic = (req, res, next) => {
       pageTitle: 'Topic',
       path: '/topic/'+topicId,
       activeTopics: true,
-      productCSS: true
+      productCSS: true,
+      isAdmin: req.session.isAdmin
     })
   });
 }

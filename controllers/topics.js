@@ -11,7 +11,8 @@ exports.getTopics = (req, res, next) => {
     path: '/',
     hasTopics: topics.length > 0,
     activeTopics: true,
-    productCSS: true
+    productCSS: true,
+    isAdmin: req.session.isAdmin
   })})
 };
 
@@ -24,7 +25,8 @@ exports.getTopic = (req, res, next) =>{
         pageTitle: 'Topic',
         path: '/htmlTopic',
         activeTopics: true,
-        productCSS: true
+        productCSS: true,
+        isAdmin: req.session.isAdmin
       })
   });
 }

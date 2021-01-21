@@ -12,13 +12,11 @@ var session = require('express-session');
 // initalize sequelize with session store
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
 
-const authorRoutes = require('./routes/author');
-const userRoutes = require('./routes/user');
-const adminRoutes = require('./routes/admin');
-const authenticationRoutes = require('./routes/auth');
+
 
 const sequelize = require('./util/database');
 const association = require('./util/association');
+const routes = require('./util/routes');
 
 
 
@@ -64,16 +62,9 @@ app.use(session({
   resave: false, saveUninitialized: false
 }));
 
-app.use('/author', authorRoutes);
-app.use('/admin', adminRoutes);
-app.use('/auth', authenticationRoutes);
-app.use('/', userRoutes);
+routes.define(app);
 
-app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-});
-
-
+//define associations between models (db structure)
 association.define();
 
 

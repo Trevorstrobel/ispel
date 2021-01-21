@@ -132,6 +132,7 @@ exports.getTopic = (req, res, next) => {
       path: '/topic/'+topicId,
       activeTopics: true,
       productCSS: true,
+      isAuthenticated: req.session.isLoggedIn,
       isAdmin: req.session.isAdmin
     })
   });

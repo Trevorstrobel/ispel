@@ -5,8 +5,10 @@
         function keywordInput(keywordInpt) {
             if (keywordInpt.value.length > 0) {
                 document.getElementById('keywords').disabled = true;
+                document.getElementById('keywords').required = false;
             } else {
                 document.getElementById('keywords').disabled = false;
+                document.getElementById('keywords').required = true;
             }
         }
         function aliasInput(aliasInpt) {
@@ -25,6 +27,8 @@
 
 
         }
+
+       
 
                 
         function topicInput(){
@@ -67,7 +71,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="name">Topic Name</label>
-                                        <input type="text" class="form-control" name="name" id="name" onkeyup="onNameChange()">
+                                        <input type="text" class="form-control" name="name" id="name" onkeyup="onNameChange()" required>
 
                                     </div>
 
@@ -89,7 +93,7 @@
                                         <label for="keywords">Keywords</label>
                                         <input list="keywords" class="form-control" name="keyword" id="keyword"
                                             onchange="keywordInput(this)">
-                                        <select name="keywords" class="form-control" id="keywords" size="4" multiple>
+                                        <select name="keywords" class="form-control" id="keywords" size="4" multiple required>
 
                                             <% for (const i in allKeywords) {%>
                                                 <option value="<%=allKeywords[i].id%>">
@@ -102,7 +106,7 @@
                                         <label for="aliases">Aliases</label>
                                         <input list="aliases" class="form-control" name="alias" id="alias"
                                             onchange="aliasInput(this)">
-                                        <select name="aliases" class="form-control" id="aliases" size="4" multiple>
+                                        <select name="aliases" class="form-control" id="aliases" size="4" multiple required>
                                             <%console.log(allAliases)%>
                                                 <% for (const j in allAliases) {%>
                                                     <option value="<%=allAliases[j].id%>">
@@ -116,13 +120,13 @@
                                     <div class="col-sm-12">
                                         <label for="paragraph">Teaser paragraph</label>
                                         <textarea name="paragraph" class="form-control" id="paragraph"
-                                            rows="10"></textarea>
+                                            rows="10" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6">
                                         <label for="contentUpload">HTML File</label>
-                                        <input type="file" name="contentUpload" id="contentUpload" accept=".html">
+                                        <input type="file" name="contentUpload" id="contentUpload" accept=".html" required>
 
                                     </div>
                                     <div class="col-sm-6">

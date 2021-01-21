@@ -18,15 +18,8 @@ const adminRoutes = require('./routes/admin');
 const authenticationRoutes = require('./routes/auth');
 
 const sequelize = require('./util/database');
+const association = require('./util/association');
 
-const Topic = require('./models/topic');
-const Keyword = require('./models/keyword');
-const TopicKeyword = require('./models/topic-keyword');
-const Alias = require('./models/alias');
-const TopicAlias = require('./models/topic-alias');
-const Domain = require('./models/domain');
-const Area = require('./models/area');
-const User = require('./models/user');
 
 
 const app = express();
@@ -74,33 +67,14 @@ app.use(session({
 app.use('/author', authorRoutes);
 app.use('/admin', adminRoutes);
 app.use('/auth', authenticationRoutes);
-
 app.use('/', userRoutes);
 
 app.use((req, res, next) => {
   res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
-Topic.belongsToMany(Keyword, {
-  through: TopicKeyword
-});
-Keyword.belongsToMany(Topic, {
-  through: TopicKeyword
-});
 
-Topic.belongsToMany(Alias, {
-  through: TopicAlias
-});
-Alias.belongsToMany(Topic, {
-  through: TopicAlias
-});
-
-Area.belongsTo(Domain);
-
-Topic.belongsTo(Area);
-
-Topic.belongsTo(User);
-
+association.define();
 
 
 

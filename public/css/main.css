@@ -115,6 +115,16 @@ main {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
 
+.navbar-custom {
+  
+  background-color: #592A8A;
+}
+
+.navbar-custom .navbar-brand, 
+        .navbar-custom .nav-item .nav-link { 
+            color: #FDC82F; 
+        } 
+
 .user-message {
   margin: auto;
   width: 90%;

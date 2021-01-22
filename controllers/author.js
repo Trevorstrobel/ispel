@@ -106,7 +106,8 @@ exports.getTopics = (req, res, next) => {
       activeTopics: true,
       productCSS: true,
       isAuthenticated: req.session.isLoggedIn,
-      isAdmin: req.session.isAdmin
+      isAdmin: req.session.isAdmin,
+      errors: []
     })})} else {
     Topic.findAll({where:{userId:req.session.user.id}}).then(topics =>{
       res.render('topics', {
@@ -117,7 +118,8 @@ exports.getTopics = (req, res, next) => {
         activeTopics: true,
         productCSS: true,
         isAuthenticated: req.session.isLoggedIn,
-        isAdmin: req.session.isAdmin
+        isAdmin: req.session.isAdmin,
+        errors: []
       })})}
 };
 
@@ -133,7 +135,8 @@ exports.getTopic = (req, res, next) => {
       activeTopics: true,
       productCSS: true,
       isAuthenticated: req.session.isLoggedIn,
-      isAdmin: req.session.isAdmin
+      isAdmin: req.session.isAdmin,
+      errors: []
     })
   });
 }

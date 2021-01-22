@@ -65,6 +65,10 @@ app.use(session({
 
 routes.define(app);
 
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+});
+
 //define associations between models (db structure)
 association.define();
 

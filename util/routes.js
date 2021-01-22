@@ -2,6 +2,7 @@ const authorRoutes = require('../routes/author');
 const userRoutes = require('../routes/user');
 const adminRoutes = require('../routes/admin');
 const authenticationRoutes = require('../routes/auth');
+const path = require('path');
 
 
 
@@ -11,9 +12,7 @@ function define(app) {
     app.use('/auth', authenticationRoutes);
     app.use('/', userRoutes);
 
-    app.use((req, res, next) => {
-        res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-    });
+  
 }
 
 

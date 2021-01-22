@@ -7,6 +7,15 @@
    <%- include('../includes/navigation.ejs') %>
 
    <div class="container">
+    <% if (errors) { %>
+      <div class = "row">
+          <%for (const i in errors) { %>
+          <div class="user-message user-message--error">
+              <%= errors[i].msg %>
+          </div>
+          <% } %>
+      </div>
+      <% } %>
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">

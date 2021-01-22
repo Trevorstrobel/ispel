@@ -12,7 +12,8 @@ exports.getAddDomain = (req, res, next) => {
         productCSS: true,
         activeAddTopic: true,
         isAuthenticated: req.session.isLoggedIn,
-        isAdmin: req.session.isAdmin
+        isAdmin: req.session.isAdmin,
+        errors: null
     })
 }
 
@@ -41,7 +42,8 @@ exports.getAddArea = (req, res, next) => {
         productCSS: true,
         activeAddTopic: true,
         isAuthenticated: req.session.isLoggedIn,
-        isAdmin: req.session.isAdmin
+        isAdmin: req.session.isAdmin,
+        errors: null
     })})
 }
 

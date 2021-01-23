@@ -6,15 +6,18 @@ const Topic = require('../models/topic');
 const Alias = require('../models/alias');
 const Domain = require('../models/domain');
 const Area = require('../models/area');
+const User = require('../models/user');
 
 
 //controller for GET add-topic
 exports.getAddTopic = (req, res, next) => {
- 
+  
+  User.findOne({where:{id:req.session.user.id}}).then(user=>{
+    return user.getDomains()
+  }).then(domains =>   { 
   Keyword.findAll().then((allKeywords) => {
     Alias.findAll().then((allAliases) => {
-      Domain.findAll({ where: { id: 2 } }).then((allDomains) => {
-        Area.findAll({ where: { domainId: 2 } }).then((allAreas) => {
+         Area.findAll({ where: { domainId: domains.map(x=>x['id']) } }).then((allAreas) => {
           res.render('add-topic', {
             pageTitle: 'Add Topic',
             path: '/author/add-topic',
@@ -23,15 +26,15 @@ exports.getAddTopic = (req, res, next) => {
             activeAddTopic: true,
             allAliases: allAliases,
             allKeywords: allKeywords,
-            allDomains: allDomains,
+            allDomains: domains,
             allAreas: allAreas,
             isAuthenticated: req.session.isLoggedIn,
             isAdmin: req.session.isAdmin
           })
         })
-      })
+      
     });
-  });
+  })});
 }
 
 //controller for POST add-topic

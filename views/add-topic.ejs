@@ -51,7 +51,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="domain">Domain Name</label>
-                                        <select type="text" class="form-control" name="domain" id="domain" disabled>
+                                        <select type="text" class="form-control" name="domain" id="domain">
                                             <% for (const i in allDomains) {%>
                                                 <option value='{"id":"<%=allDomains[i].id%>","code":"<%=allDomains[i].shortName%>"}'>
                                                     <%= allDomains[i].name%>

@@ -6,6 +6,7 @@ const TopicAlias = require('../models/topic-alias');
 const Domain = require('../models/domain');
 const Area = require('../models/area');
 const User = require('../models/user');
+const UserDomain = require('../models/user-domain');
 
 
 //Relationships between models
@@ -25,6 +26,13 @@ Topic.belongsToMany(Keyword, {
   Area.belongsTo(Domain);
   Topic.belongsTo(Area);
   Topic.belongsTo(User);
+
+  User.belongsToMany(Domain, {
+    through: UserDomain
+  });
+  Domain.belongsToMany(User, {
+    through: UserDomain
+  });
 }
 
 module.exports={define};

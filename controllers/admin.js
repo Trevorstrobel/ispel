@@ -1,5 +1,6 @@
 const Domain = require('../models/domain');
 const Area = require('../models/area');
+const User = require('../models/user');
 
 exports.getAddDomain = (req, res, next) => {
     if(!req.session.isLoggedIn) {
@@ -58,4 +59,37 @@ exports.postAddArea = (req, res, next) => {
     }).then(() =>{
         res.redirect('/admin/add-area');
     })
+}
+
+exports.getAssignUser = (req, res, next) => {
+    if(!req.session.isLoggedIn) {
+        return res.redirect('/auth/login');
+      }
+    User.findAll().then(users =>{
+        Domain.findAll().then(domains =>{
+            res.render('assign-user', {
+                pageTitle: 'Assign User',
+                path: '/admin/assign-user',
+                activeAddTopic: true,
+                isAuthenticated: req.session.isLoggedIn,
+                isAdmin: req.session.isAdmin,
+                errors: null,
+                users: users,
+                domains: domains
+            })
+        })
+    }).catch(err => console.log(err));
+  
+}
+
+exports.postAssignUser = (req, res, next) => {
+    const userId = req.body.userId;
+    const domainIds = req.body.domainIds;
+
+    User.findOne({where:{id: userId}}).then(user =>{
+        Domain.findAll({where:{id: domainIds}}).then(domains =>{
+            user.setDomains(domains);
+            res.redirect('/admin/add-area');
+        })
+    }).catch(err => console.log(err));
 }

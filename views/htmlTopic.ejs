@@ -8,8 +8,9 @@
    <%- include('./includes/navigation.ejs') %>
 
     <main>
-        <iframe src="/<%=topic.contentHtml%>"  width="100%" height="1024px">
-
-        </iframe>
+        <div id ="content">
+            <iframe src="/<%=topic.contentHtml%>"  width="100%" height="1024px">
+            </iframe>
+        </div>
     </main>
 <%- include('./includes/end.ejs') %>

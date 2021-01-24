@@ -2,6 +2,9 @@ const Domain = require('../models/domain');
 const Area = require('../models/area');
 const User = require('../models/user');
 
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 exports.getAddDomain = (req, res, next) => {
     if(!req.session.isLoggedIn) {
         return res.redirect('/auth/login');
@@ -61,35 +64,87 @@ exports.postAddArea = (req, res, next) => {
     })
 }
 
-exports.getAssignUser = (req, res, next) => {
-    if(!req.session.isLoggedIn) {
-        return res.redirect('/auth/login');
-      }
+exports.getManageUsers = (req, res, next) => {
     User.findAll().then(users =>{
-        Domain.findAll().then(domains =>{
-            res.render('assign-user', {
-                pageTitle: 'Assign User',
-                path: '/admin/assign-user',
+            res.render('users', {
+                pageTitle: 'Users',
+                path: '/admin/users',
                 activeAddTopic: true,
                 isAuthenticated: req.session.isLoggedIn,
                 isAdmin: req.session.isAdmin,
                 errors: null,
-                users: users,
-                domains: domains
+                users: users
             })
-        })
-    }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
   
 }
 
-exports.postAssignUser = (req, res, next) => {
-    const userId = req.body.userId;
-    const domainIds = req.body.domainIds;
-
-    User.findOne({where:{id: userId}}).then(user =>{
-        Domain.findAll({where:{id: domainIds}}).then(domains =>{
-            user.setDomains(domains);
-            res.redirect('/admin/add-area');
-        })
-    }).catch(err => console.log(err));
+exports.getUser = (req, res, next) => {
+    User.findOne({where:{id:req.params.userId}}).then(user =>{
+            Domain.findAll().then(domains =>{
+                user.getDomains().then(selectedDomains =>{
+           console.log(selectedDomains.map(x => x.id));
+            res.render('user', {
+                pageTitle: 'User',
+                path: '/admin/user'+req.params.userId,
+                activeAddTopic: true,
+                isAuthenticated: req.session.isLoggedIn,
+                isAdmin: req.session.isAdmin,
+                errors: null,
+                user: user,
+                domains: domains,
+                selectedDomains: selectedDomains.map(x => x.id)
+            })})})
+        }).catch(err => console.log(err));
+  
 }
+
+exports.postUser = (req, res, next) => {
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const password = req.body.password;
+    const admin = ((req.body.admin=='on')?true:false);
+    const domainIds = req.body.domainIds;
+    
+    User.findOne({where:{id:req.params.userId}})
+    .then(user => {
+        if (password.length>0){
+            return bcrypt.hash(password, 12).then(hashedPassword =>{
+        user.update({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: hashedPassword,
+            admin: admin
+        }).then(user =>{
+            Domain.findAll({where:{id:domainIds}}).then(domains=>{
+                user.setDomains(domains).then(()=>{
+                    res.redirect('/admin/users');
+                })
+            })
+        })})} else {
+            user.update({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                admin: admin
+            }).then(user =>{
+                if (Array.isArray(domainIds)){
+                Domain.findAll({where:{id:{[Op.in]:domainIds}}}).then(domains=>{
+                    user.setDomains(domains).then(()=>{
+                        res.redirect('/admin/users');
+                    })
+                })
+        } else{
+            Domain.findOne({where:{id:domainIds}}).then(domains=>{
+            user.setDomains(domains).then(()=>{
+                res.redirect('/admin/users');
+            })
+        })
+
+        }
+    }).catch(err => console.log(err))};
+    })
+}
+

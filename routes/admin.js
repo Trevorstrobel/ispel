@@ -16,7 +16,10 @@ router.post('/add-domain', adminController.postAddDomain);
 router.get('/add-area', isAuth, isAdmin, adminController.getAddArea);
 router.post('/add-area', adminController.postAddArea);
 
-router.get('/assign-user', isAuth, isAdmin, adminController.getAssignUser);
-router.post('/assign-user', isAuth, isAdmin, adminController.postAssignUser);
+router.get('/users', isAuth, isAdmin, adminController.getManageUsers);
+
+router.get('/user/:userId', isAuth, isAdmin, adminController.getUser);
+router.post('/user/:userId', isAuth, isAdmin, adminController.postUser);
+
 
 module.exports = router;

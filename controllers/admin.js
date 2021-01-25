@@ -11,7 +11,7 @@ exports.getAddDomain = (req, res, next) => {
     if(!req.session.isLoggedIn) {
         return res.redirect('/auth/login');
       }
-    res.render('add-domain', {
+    res.render('admin/add-domain', {
         pageTitle: 'Add Domain',
         path: '/admin/add-domain',
         formsCSS: true,
@@ -40,7 +40,7 @@ exports.getAddArea = (req, res, next) => {
         return res.redirect('/auth/login');
       }
     Domain.findAll().then((domains) =>{
-    res.render('add-area', {
+    res.render('admin/add-area', {
         pageTitle: 'Add Area',
         path: '/admin/add-area',
         domains: domains,
@@ -68,7 +68,7 @@ exports.postAddArea = (req, res, next) => {
 
 exports.getManageUsers = (req, res, next) => {
     User.findAll().then(users =>{
-            res.render('users', {
+            res.render('admin/users', {
                 pageTitle: 'Users',
                 path: '/admin/users',
                 activeAddTopic: true,
@@ -86,7 +86,7 @@ exports.getUser = (req, res, next) => {
             Domain.findAll().then(domains =>{
                 user.getDomains().then(selectedDomains =>{
            console.log(selectedDomains.map(x => x.id));
-            res.render('user', {
+            res.render('admin/user', {
                 pageTitle: 'User',
                 path: '/admin/user'+req.params.userId,
                 activeAddTopic: true,

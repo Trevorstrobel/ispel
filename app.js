@@ -19,6 +19,8 @@ const sequelize = require('./util/database');
 const association = require('./util/association');
 const routes = require('./util/routes');
 
+const errorController = require('./controllers/error');
+
 
 
 const app = express();
@@ -65,9 +67,7 @@ app.use(session({
 
 routes.define(app);
 
-app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-});
+app.use(errorController.get404);
 
 //define associations between models (db structure)
 association.define();

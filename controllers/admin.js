@@ -2,6 +2,8 @@ const Domain = require('../models/domain');
 const Area = require('../models/area');
 const User = require('../models/user');
 
+
+const bcrypt = require('bcryptjs');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

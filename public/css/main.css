@@ -19,14 +19,13 @@ main {
 #content {
   width: calc(100% - 175px);
   height: calc(100% -175px);
-  margin-top: 50px;
+  margin-top: 50px; 
   right: 0;
   transition: all 0.3s;
 }
 
-#content.active {
-  width: 100%
-}
+
+
 
 /* Main Header */
 
@@ -99,6 +98,41 @@ main {
   margin-left: -175px;
 }
 
+
+
+#sidebarCollapse {
+  width: 40px;
+  height: 40px;
+  background: #582c83;
+  cursor: pointer;
+}
+
+#sidebarCollapse span {
+  width: 80%;
+  height: 2px;
+  margin: 0 auto;
+  display: block;
+  background: #fdc82f;
+  transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+  transition-delay: 0.2s;
+}
+
+#sidebarCollapse span:first-of-type {
+  transform: rotate(45deg) translate(2px, 2px);
+}
+#sidebarCollapse span:nth-of-type(2) {
+  opacity: 0;
+}
+#sidebarCollapse span:last-of-type {
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+
+#sidebarCollapse.active span {
+  transform: none;
+  opacity: 1;
+  margin: 5px auto;
+}
 /*Grid*/
 
 .grid {
@@ -181,4 +215,10 @@ main {
 .btn:hover, .btn:active {
   background-color: #00695c;
   color: white;
+}
+
+.navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
 }

@@ -17,15 +17,30 @@
             <a href="#expertSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Expert</a>
               <ul class="collapse list-unstyled" id="expertSubmenu">
                 <li class="nav-link">
-                  <a href="/admin/add-domain/">Add Domain</a>
+                  <a href="/admin/add-domain/">+ Domain</a>
                 </li>
                 <li class="nav-link">
-                  <a href="/admin/add-area/">Add Topic</a>
+                  <a href="/admin/add-area/">+ Topic Area</a>
                 </li>
               </ul>
           </li>
   
-            <%}%>
+        <%}%>
+
+        <!-- Admin Menu
+        The Admin Menu is made available to users wih "admin" permissions. -->
+        <% if (isAdmin){%>
+          <li class="nav-link active">
+            <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
+              <ul class="collapse list-unstyled" id="adminSubmenu">
+                <li class="nav-link">
+                  <a href="/admin/users/">Manage Users</a>
+                </li>
+              </ul>
+          </li>
+        <%}%>
+
+
             <li class="nav-item">
               <a class="nav-link" href="/author/add-topic/">Add Topic</a>
             </li>
@@ -55,16 +70,18 @@
   <!-- Top Nav Bar-->
   <div class="main-header" id="main-header">
     <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-      <button type="button" id="sidebarCollapse" class="btn btn-info">
-        <i class="fas fa-align-left"></i>
-        <span> Toggle Sidebar</span>
-      </button>
+      <button type="button" id="sidebarCollapse" class="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+  
       
       <a class="navbar-brand" href="">ISPeL</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    
+    <!--------------
       <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto ">
           <li class="nav-item">
@@ -108,7 +125,7 @@
        
       </div>
     </nav>
-
+    --------------->
 
   </div>
 
@@ -122,7 +139,11 @@
         $('#sidebarCollapse').on('click', function () {
             $('#main-sidebar, .content, #main-header').toggleClass('active');
             $('.collapse.in').toggleClass('in');
+
             $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            $(this).toggleClass('active;')
         });
     });
   </script>
+  
+</script>

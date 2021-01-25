@@ -14,8 +14,6 @@
 
    - Configure db name, username, password and host in the util/database.js
 
-     ![](C:\Users\Kate\Pictures\db_config.png)
-
    - run server
 
      
@@ -45,6 +43,20 @@ The models are realized using Sequelize module. Each model contains the structur
 ### **View**
 
  The views are presented by ejs templates.
+
+Those templates are organized by corresponding folders:
+
+\- admin - all views that are related to administrative part
+
+\- auth - authorization views
+
+\- author - all views responsible for topics
+
+\- includes - common parts for all views (header, footer, navigation)
+
+The only view that is not in the folders - 404 error view
+
+
 
 ### **Controller**
 

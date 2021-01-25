@@ -1,6 +1,24 @@
+# Welcome to the *Interactive System for Personalized Learning* system
+
+
+
 ## **Installation instructions**
 
+1. Pull this repository
 
+2. run *npm install* in the project folder
+
+3. Configure PostreSQL database:
+
+   - Create new PostgreSQL database
+
+   - Configure db name, username, password and host in the util/database.js
+
+     ![](C:\Users\Kate\Pictures\db_config.png)
+
+   - run server
+
+     
 
 ## **Project structure**
 

@@ -1,6 +1,6 @@
   <!--****************** Sidebar ******************-->
-  <div class="main-sidebar-wrapper">
-    <nav class="main-sidebar" id='main-sidebar'>
+  <div class="main-sidebar-wrapper" id='main-sidebar'>
+    <nav class="main-sidebar" id='navbarSupportedContent'>
       <ul class="list-unstyled components">
         
         <li class="nav-item">
@@ -13,9 +13,9 @@
           Domains as well. 
         -->
         <% if (isAdmin){%>
-          <li class="nav-link active">
-            <a href="#expertSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Expert</a>
-              <ul class="collapse list-unstyled" id="expertSubmenu">
+          <li class="nav-item active">
+            <a href="#expertSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">Expert</a>
+              <ul class="collapse list-unstyled nav-item" id="expertSubmenu">
                 <li class="nav-link">
                   <a href="/admin/add-domain/">+ Domain</a>
                 </li>
@@ -30,8 +30,8 @@
         <!-- Admin Menu
         The Admin Menu is made available to users wih "admin" permissions. -->
         <% if (isAdmin){%>
-          <li class="nav-link active">
-            <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Admin</a>
+          <li class="nav-item active">
+            <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">Admin</a>
               <ul class="collapse list-unstyled" id="adminSubmenu">
                 <li class="nav-link">
                   <a href="/admin/users/">Manage Users</a>
@@ -78,10 +78,11 @@
   
       
       <a class="navbar-brand" href="">ISPeL</a>
+      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    <!--------------
+      <!--------------
       <div class="collapse navbar-collapse navbar-right" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto ">
           <li class="nav-item">
@@ -131,7 +132,6 @@
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 
   <script type="text/javascript">
     $(document).ready(function () {

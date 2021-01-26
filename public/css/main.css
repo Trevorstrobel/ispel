@@ -85,6 +85,7 @@ main {
   min-width: 175px;
   max-width: 175px;
   position: fixed;
+  align-items: center;
   top: 0;
   left: 0;
   height: 100vh;
@@ -96,6 +97,10 @@ main {
 
 #main-sidebar.active {
   margin-left: -175px;
+}
+
+.main-sidebar .nav-link {
+  color:black;
 }
 
 
@@ -112,7 +117,7 @@ main {
   height: 2px;
   margin: 0 auto;
   display: block;
-  background: #fdc82f;
+  background: #c7c7c7;
   transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
   transition-delay: 0.2s;
 }
@@ -149,7 +154,7 @@ main {
 }
 
 .navbar-custom {
-  background-color: #592A8A;
+  background-color: #582c83;
 }
 
 .navbar-custom .navbar-brand, .navbar-custom .nav-item .nav-link {

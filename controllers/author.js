@@ -18,7 +18,7 @@ exports.getAddTopic = (req, res, next) => {
   Keyword.findAll().then((allKeywords) => {
     Alias.findAll().then((allAliases) => {
          Area.findAll({ where: { domainId: domains.map(x=>x['id']) } }).then((allAreas) => {
-          res.render('add-topic', {
+          res.render('author/add-topic', {
             pageTitle: 'Add Topic',
             path: '/author/add-topic',
             formsCSS: true,
@@ -101,7 +101,7 @@ exports.getTopics = (req, res, next) => {
   
   if (req.session.isAdmin){
     Topic.findAll().then(topics =>{
-    res.render('topics', {
+    res.render('author/topics', {
       topics: topics,
       pageTitle: 'Topics',
       path: '/',
@@ -131,7 +131,7 @@ exports.getTopic = (req, res, next) => {
   const topicId = req.params.topicId;
 
   Topic.findOne({ where: { id: topicId } }).then((topic) => {
-    res.render('topic', {
+    res.render('author/topic', {
       topic: topic,
       pageTitle: 'Topic',
       path: '/topic/'+topicId,

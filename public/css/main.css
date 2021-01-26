@@ -132,6 +132,10 @@ main {
   transform: rotate(-45deg) translate(1px, -1px);
 }
 
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
 
 #sidebarCollapse.active span {
   transform: none;
